@@ -1,0 +1,35 @@
+<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()" class="login-box">
+  <div class="user-icon">
+    <i class="user-icon__icon" nz-icon nzType="user" nzTheme="outline"></i>
+  </div>
+
+  <nz-form-item>
+    <nz-form-control nzErrorTip="Please input your email!" nzHasFeedback [nzValidateStatus]="validateForm.controls['userName']">
+      <nz-input-group nzPrefixIcon="mail">
+        <input type="email" nz-input formControlName="userName" placeholder="Email">
+      </nz-input-group>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-control nzErrorTip="Please input your password!" nzHasFeedback [nzValidateStatus]="validateForm.controls['password']">
+      <nz-input-group nzPrefixIcon="lock" [nzSuffix]="suffixIcon">
+        <input type="password" nz-input formControlName="password" placeholder="Password"
+               [type]="hidePassword ? 'password' : 'text'">
+      </nz-input-group>
+
+      <ng-template #suffixIcon>
+        <i nz-icon [nzType]="hidePassword ? 'eye-invisible' : 'eye'" (click)="hidePassword = !hidePassword"></i>
+      </ng-template>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-control>
+    <label nz-checkbox formControlName="remember" style="float: left;">
+      <span>Remember me</span>
+    </label>
+    <a class="login-form-forgot" style="float: right;">Forgot password?</a>
+    <br>
+    <button nz-button class="login-form-button" [nzType]="'primary'">Log in</button>
+  </nz-form-control>
+</form>
