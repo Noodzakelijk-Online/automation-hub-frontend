@@ -16,8 +16,6 @@ import {NzButtonModule} from "ng-zorro-antd/button";
 import {AUTOMATIONS_SERVICE_TOKEN} from "../../services/automations/automations.service.token";
 import {AutomationsService} from "../../services/automations/automations.service";
 import {NzUploadModule} from "ng-zorro-antd/upload";
-import {HTTP_INTERCEPTORS} from "@angular/common/http";
-import {AuthInterceptorService} from "../../interceptors/auth-interceptor.service";
 import { AutomationsFormComponent } from './modals/automations-form/automations-form.component';
 
 const routes: Routes = [
@@ -45,7 +43,6 @@ const routes: Routes = [
   exports: [HomeComponent],
   providers: [
     {provide: AUTOMATIONS_SERVICE_TOKEN, useClass: AutomationsService},
-    //{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }
   ]
 })
 export class HomeModule {
