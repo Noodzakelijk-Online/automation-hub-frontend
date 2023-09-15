@@ -17,6 +17,8 @@ import {AUTOMATIONS_SERVICE_TOKEN} from "../../services/automations/automations.
 import {AutomationsService} from "../../services/automations/automations.service";
 import {NzUploadModule} from "ng-zorro-antd/upload";
 import { AutomationsFormComponent } from './modals/automations-form/automations-form.component';
+import {USER_SERVICE_TOKEN} from "../../services/user/user.service.token";
+import {UserService} from "../../services/user/user.service";
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -43,6 +45,7 @@ const routes: Routes = [
   exports: [HomeComponent],
   providers: [
     {provide: AUTOMATIONS_SERVICE_TOKEN, useClass: AutomationsService},
+      {provide: USER_SERVICE_TOKEN, useClass: UserService}
   ]
 })
 export class HomeModule {

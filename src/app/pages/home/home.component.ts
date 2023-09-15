@@ -8,11 +8,12 @@ import {IAutomationsService} from "../../services/automations.service.interface"
 import {IAutomationModel} from "../../models/automation.model.interface";
 import {AUTH_SERVICE_TOKEN} from "../../services/auth/auth.service.token";
 import {IAuthService} from "../../services/auth.service.interface";
-import {TOKEN_KEY, TOKEN_KEY_REFRESH} from "../../constants";
-import {tap} from "rxjs/operators";
 import {AutomationsFormComponent} from "./modals/automations-form/automations-form.component";
 import {NzModalService} from "ng-zorro-antd/modal";
 import {Subscription} from "rxjs";
+import {UserService} from "../../services/user/user.service";
+import {USER_SERVICE_TOKEN} from "../../services/user/user.service.token";
+import {IUserModel} from "../../models/user.model.interface";
 
 
 @Component({
@@ -31,7 +32,8 @@ export class HomeComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private notification: NzNotificationService, private modalService: NzModalService,
               @Inject(AUTOMATIONS_SERVICE_TOKEN) private automationsService: IAutomationsService,
-              @Inject(AUTH_SERVICE_TOKEN) private authService: IAuthService, private router: Router) {
+              @Inject(AUTH_SERVICE_TOKEN) private authService: IAuthService,
+              @Inject(USER_SERVICE_TOKEN) private userService: UserService, private router: Router) {
   }
 
 
@@ -47,15 +49,14 @@ export class HomeComponent implements OnInit {
 
 
   logout() {
-    this.authService.logout().pipe(
-      tap(() => {
-        localStorage.removeItem(TOKEN_KEY);
-        localStorage.removeItem(TOKEN_KEY_REFRESH);
-        this.router.navigate(['/login']);
-      })
-    ).subscribe({
-      error: (error) => {
-        console.error('Error in logout:', error);
+    this.authService.logout().subscribe({
+      next: () => {
+        this.router.navigate(['/login']).then(() => {
+        });
+      },
+      error: err => {
+        this.notification.error('Error', 'There was an issue during logout.');
+        console.error(err);
       }
     });
   }
@@ -104,7 +105,7 @@ export class HomeComponent implements OnInit {
 
 
   showProfileModal(): void {
-    this.userSubscription = this.authService.getUser().subscribe(user => {
+    this.userSubscription = this.userService.getUser().subscribe(user => {
       this.profileForm.get('email')?.setValue(user.email);
       this.isProfileVisible = true;
     });
@@ -120,9 +121,23 @@ export class HomeComponent implements OnInit {
       return;
     }
 
-    console.log('Profile form submit', this.profileForm.value);
-    this.isProfileVisible = false;
-    this.profileForm.reset();
+    const user: IUserModel = {
+        email: this.profileForm.get('email')?.value,
+        password: this.profileForm.get('password')?.value
+    }
+
+    this.userSubscription = this.userService.updateUser(user).subscribe({
+      next: () => {
+        this.notification.success('Success', 'Profile updated successfully');
+        this.loadAutomations();
+        this.isProfileVisible = false;
+        this.profileForm.reset();
+      },
+      error: err => {
+        this.notification.error('Error', 'There was an issue updating your profile.');
+        console.error(err);
+      }
+    });
   }
 
 

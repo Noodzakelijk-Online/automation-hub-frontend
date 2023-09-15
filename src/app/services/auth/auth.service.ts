@@ -33,8 +33,4 @@ export class AuthService implements IAuthService {
             })
         );
     }
-
-    getUser(): Observable<IUserModel> {
-        return this.http.get<IUserModel>(`${this.apiUrl}/user-logged`);
-    }
 }

@@ -5,5 +5,4 @@ export interface IAuthService {
   login(username: string, password: string): Observable<Object>;
   logout(): Observable<void>;
   loggedIn(): Observable<boolean>;
-  getUser(): Observable<IUserModel>;
 }
