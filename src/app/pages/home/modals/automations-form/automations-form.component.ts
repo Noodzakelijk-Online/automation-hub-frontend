@@ -28,21 +28,21 @@ export class AutomationsFormComponent implements OnInit {
             name: ['', {validators: [Validators.required, Validators.maxLength(50)]}],
             host: ['', {validators: [Validators.required, Validators.maxLength(50)]}],
             port: ['', {validators: [Validators.required, Validators.min(1), Validators.max(65535)]}],
-            image: ['']
         });
     }
 
-  beforeUpload = (file: NzUploadFile, fileList: NzUploadFile[]): boolean => {
-    this.selectedImage = file.originFileObj; // Armazena a imagem carregada
-    return false; // Impede o envio automático
-  };
+    beforeUpload = (file: NzUploadFile, fileList: NzUploadFile[]): boolean => {
+        this.selectedImage = file as unknown as File;
+        console.log('file in beforeUpload: ', this.selectedImage);
+        return false; // Impede o envio automático
+    };
 
 
     handleImageUpload({file, fileList}: NzUploadChangeParam): void {
-      this.selectedImage = file.originFileObj; // Armazene o objeto de arquivo original
-      console.log('status: ', file.status);
-      console.log('file: ', file);
-      console.log('file - selectedImage: ', this.selectedImage);
+        this.selectedImage = file.originFileObj; // Armazene o objeto de arquivo original
+        console.log('status: ', file.status);
+        console.log('file: ', file);
+        console.log('file - selectedImage: ', this.selectedImage);
         const status = file.status;
         if (status !== 'uploading') {
             console.log(file, fileList);
@@ -66,6 +66,7 @@ export class AutomationsFormComponent implements OnInit {
     }
 
     onSubmit(): void {
+        console.log('imageFile in onSubmit: ', this.selectedImage);
         if (!this.automationForm.valid) {
             for (const i in this.automationForm.controls) {
                 this.automationForm.controls[i].markAsDirty();
@@ -109,6 +110,7 @@ export class AutomationsFormComponent implements OnInit {
         this.automationForm.reset();
         this.modalTitle = '';
     }
+
     removeImage() {
         this.automationForm.get('image')?.setValue('REMOVE_IMAGE');
     }

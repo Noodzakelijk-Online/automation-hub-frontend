@@ -80,6 +80,7 @@ export class HomeComponent implements OnInit {
 
   handleFormDataAutomationSubmitted(automation: IAutomationModel) {
     console.log('automation pré sending to service front: ', automation)
+    console.log('imageFile: ', automation.imageFile)
     if (this.automationModal.isUpdate) {
       this.automationsService.updateAutomation(automation).subscribe({
         next: () => {
