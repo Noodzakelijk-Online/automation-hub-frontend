@@ -12,10 +12,10 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   getUser(): Observable<IUserModel> {
-    return this.http.get<IUserModel>(`${this.apiUrl}/current`);
+    return this.http.get<IUserModel>(`${this.apiUrl}/`);
   }
 
     updateUser(user: IUserModel): Observable<IUserModel> {
-        return this.http.patch<IUserModel>(`${this.apiUrl}/current`, user);
+        return this.http.patch<IUserModel>(`${this.apiUrl}/`, user);
     }
 }
