@@ -4,7 +4,7 @@ export interface IAutomationModel {
   port: number;
   position: number;
   host: string;
-  id?: number;
+  id?: string;
   imageFile?: File;
   removeImage: boolean;
 }

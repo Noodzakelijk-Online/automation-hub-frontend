@@ -83,6 +83,10 @@ export class AutomationsFormComponent implements OnInit {
             removeImage: this.removeImage
         }
 
+        if (!automation.id) {
+            delete automation.id;
+        }
+
         this.formDataSubmitted.emit(automation);
         this.closeModal();
     }

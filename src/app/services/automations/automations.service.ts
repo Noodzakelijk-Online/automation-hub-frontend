@@ -22,11 +22,11 @@ export class AutomationsService implements IAutomationsService {
     return this.http.post<IAutomationModel>(`${this.apiUrl}/`, automation);
   }
 
-  deleteAutomation(id: number): Observable<void> {
+  deleteAutomation(id: string): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 
-  getAutomation(id: number): Observable<IAutomationModel> {
+  getAutomation(id: string): Observable<IAutomationModel> {
     return this.http.get<IAutomationModel>(`${this.apiUrl}/${id}`);
   }
 
@@ -35,7 +35,7 @@ export class AutomationsService implements IAutomationsService {
     return this.http.patch<IAutomationModel>(`${this.apiUrl}/`, automation);
   }
 
-  swapAutomations(automation_id1: number, automation_id2: number): Observable<void> {
+  swapAutomations(automation_id1: string, automation_id2: string): Observable<void> {
     return this.http.get<void>(`${this.apiUrl}/swap/${automation_id1}/${automation_id2}`);
   }
 

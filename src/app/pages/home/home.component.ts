@@ -183,7 +183,7 @@ export class HomeComponent implements OnInit {
     this.automationModal.openModal(automation, isUpdate);
   }
 
-  deleteAutomation(automationId: number): void {
+  deleteAutomation(automationId: string): void {
     this.modalService.confirm({
       nzTitle: 'Are you sure you want to delete this automation?',
       nzContent: 'This action cannot be undone.',
