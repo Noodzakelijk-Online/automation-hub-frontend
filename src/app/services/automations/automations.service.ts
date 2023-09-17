@@ -36,7 +36,7 @@ export class AutomationsService implements IAutomationsService {
   }
 
   swapAutomations(automation_id1: number, automation_id2: number): Observable<void> {
-    return this.http.get<void>(`${this.apiUrl}/${automation_id1}/swap/${automation_id2}`);
+    return this.http.get<void>(`${this.apiUrl}/swap/${automation_id1}/${automation_id2}`);
   }
 
 }
