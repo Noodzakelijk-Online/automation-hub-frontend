@@ -8,7 +8,7 @@ import {HttpClient} from "@angular/common/http";
   providedIn: 'root'
 })
 export class AutomationsService implements IAutomationsService {
-  private apiUrl = '/api/automation';
+  private apiUrl = '/api/v1/automation';
 
   constructor(private http: HttpClient) {
   }
