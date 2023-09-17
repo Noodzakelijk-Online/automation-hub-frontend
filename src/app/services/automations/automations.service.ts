@@ -19,7 +19,7 @@ export class AutomationsService implements IAutomationsService {
 
   addAutomation(automation: IAutomationModel): Observable<IAutomationModel> {
     console.log('sending in service frontend: ', automation)
-    return this.http.post<IAutomationModel>(this.apiUrl, automation);
+    return this.http.post<IAutomationModel>(`${this.apiUrl}/`, automation);
   }
 
   deleteAutomation(id: number): Observable<void> {
@@ -36,7 +36,7 @@ export class AutomationsService implements IAutomationsService {
   }
 
   swapAutomations(automation_id1: number, automation_id2: number): Observable<void> {
-    return this.http.patch<void>(`${this.apiUrl}/swap`, {id1: automation_id1, id2: automation_id2});
+    return this.http.get<void>(`${this.apiUrl}/${automation_id1}/swap/${automation_id2}`);
   }
 
 }

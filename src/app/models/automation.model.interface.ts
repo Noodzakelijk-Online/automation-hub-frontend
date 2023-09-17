@@ -6,5 +6,5 @@ export interface IAutomationModel {
   host: string;
   id?: number;
   imageFile?: File;
-
+  removeImage: boolean;
 }

@@ -11,6 +11,7 @@ import {NzNotificationService} from "ng-zorro-antd/notification";
 })
 export class AutomationsFormComponent implements OnInit {
     modalTitle: string = '';
+    removeImage: boolean = false;
     selectedImage: File | undefined;
     @Input() isUpdate: boolean = false;
     @Input() isVisible: boolean = false;
@@ -78,7 +79,8 @@ export class AutomationsFormComponent implements OnInit {
         const automation: IAutomationModel = {
             ...this.automationForm.value,
             position: 0,
-            imageFile: this.selectedImage
+            imageFile: this.selectedImage,
+            removeImage: this.removeImage
         }
 
         this.formDataSubmitted.emit(automation);
@@ -111,8 +113,7 @@ export class AutomationsFormComponent implements OnInit {
         this.modalTitle = '';
     }
 
-    removeImage() {
-        this.automationForm.get('image')?.setValue('REMOVE_IMAGE');
+    deleteImage() {
+        this.removeImage = true;
     }
-
 }
