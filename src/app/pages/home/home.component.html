@@ -27,7 +27,7 @@
         <div class="card-container__card__image-wrapper">
           <a [href]="'http://www.domain.com:' + automation.port">
             <img *ngIf="automation.image; else noImage" class="card-container__card__image"
-                 [src]="'/api/image/' + automation.image"
+                 [src]="'/api/v1/images/' + automation.image"
                  alt="{{automation.name}}"/>
             <ng-template #noImage>
               <i nz-icon nzType="tool" nzTheme="outline" class="card-container__card__icon"></i>
