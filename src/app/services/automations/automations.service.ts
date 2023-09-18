@@ -18,9 +18,25 @@ export class AutomationsService implements IAutomationsService {
   }
 
   addAutomation(automation: IAutomationModel): Observable<IAutomationModel> {
-    console.log('sending in service frontend: ', automation)
-    return this.http.post<IAutomationModel>(`${this.apiUrl}/`, automation);
+    const formData = new FormData();
+
+    formData.append('name', automation.name);
+    formData.append('host', automation.host);
+    formData.append('port', automation.port.toString());
+    formData.append('position', automation.position.toString());
+    formData.append('removeImage', automation.removeImage.toString());
+
+    if (automation.id) {
+      formData.append('id', automation.id);
+    }
+
+    if (automation.imageFile) {
+      formData.append('imageFile', automation.imageFile, automation.imageFile.name);
+    }
+
+    return this.http.post<IAutomationModel>(`${this.apiUrl}/`, formData);
   }
+
 
   deleteAutomation(id: string): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
