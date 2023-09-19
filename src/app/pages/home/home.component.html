@@ -25,7 +25,7 @@
                nzTitle="{{automation.name}}"
                [nzExtra]="extraTemplate">
         <div class="card-container__card__image-wrapper">
-          <a [href]="'http://www.domain.com:' + automation.port">
+          <a [href]="'/' + automation.urlPath">
             <img *ngIf="automation.image; else noImage" class="card-container__card__image"
                  [src]="'/api/v1/images/' + automation.image"
                  alt="{{automation.name}}"/>
