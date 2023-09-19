@@ -31,6 +31,7 @@ export class AutomationsService implements IAutomationsService {
     }
 
     if (automation.imageFile) {
+      console.log(`Appending image file: ${automation.imageFile.name} with size: ${automation.imageFile.size} bytes`);
       formData.append('imageFile', automation.imageFile, automation.imageFile.name);
     }
 
