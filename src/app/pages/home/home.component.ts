@@ -165,7 +165,7 @@ export class HomeComponent implements OnInit {
   loadAutomations() {
     this.automationsService.getAutomations().subscribe({
       next: (automations: IAutomationModel[]) => {
-        this.automations = automations;
+        this.automations = automations.sort((a, b) => a.position - b.position);
       },
       error: (error) => {
         // registry a log
