@@ -69,18 +69,25 @@
           </nz-upload>
           <!-- <button class="ant-button-remove-image" nz-button></button> -->
           <ng-container *ngIf="removeImage">
-            <span
-              class="ant-button-remove-image"
-              (click)="deleteImage()"
-              style="color: green"
-              >Remove Image</span
-            >
+            <div class="ant-upload-text__information">
+              <span nz-icon nzType="clear" nzTheme="outline"></span>
+              <span
+                class="ant-button-remove-image"
+                (click)="deleteImage()"
+                style="color: green"
+              >
+                Remove Image
+              </span>
+            </div>
           </ng-container>
           <ng-container *ngIf="!removeImage">
-            <span class="ant-button-remove-image" (click)="deleteImage()"
-              >Remove Image</span
-            ></ng-container
-          >
+            <div class="ant-upload-text__information">
+              <span nz-icon nzType="delete" nzTheme="outline"></span>
+              <span class="ant-button-remove-image" (click)="deleteImage()"
+                >Remove Image</span
+              >
+            </div>
+          </ng-container>
         </nz-form-control>
       </nz-form-item>
     </form>
