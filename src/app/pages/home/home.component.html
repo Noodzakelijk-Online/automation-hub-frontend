@@ -1,108 +1,233 @@
-<nz-layout>
-  <nz-header class="header-container">
-    <div class="header-content">
-      <h1 class="header-content__title">ServiceHub</h1>
-      <i class="header-content__menu" nz-dropdown nz-icon nzType="menu" [nzDropdownMenu]="mainMenu" nzTheme="outline"
-         nzPlacement="bottomRight"></i>
-      <nz-dropdown-menu #mainMenu="nzDropdownMenu">
-        <ul nz-menu>
-          <li nz-menu-item (click)="showProfileModal()"><i class="menu-item__icon" nz-icon nzType="user"
-                                                           nzTheme="outline"></i> Profile
-          </li>
-          <li nz-menu-item (click)="openAutomationModal()"><i class="menu-item__icon" nz-icon nzType="plus"
-                                                              nzTheme="outline"></i> Add Automation
-          </li>
-          <li nz-menu-item (click)="logout()"><i class="menu-item__icon" nz-icon nzType="logout" nzTheme="outline"></i>
-            Logout
-          </li>
-        </ul>
-      </nz-dropdown-menu>
-    </div>
-  </nz-header>
-  <nz-content class="content-container">
-    <div cdkDropList cdkDropListOrientation="horizontal" class="card-container" (cdkDropListDropped)="drop($event)">
-      <nz-card class="card-container__card" *ngFor="let automation of automations" cdkDrag
-               nzTitle="{{automation.name}}"
-               [nzExtra]="extraTemplate">
-        <div class="card-container__card__image-wrapper">
-          <a [href]="'/' + automation.urlPath">
-            <img *ngIf="automation.image; else noImage" class="card-container__card__image"
-                 [src]="'/api/v1/automation/images/' + automation.image"
-                 alt="{{automation.name}}"/>
-            <ng-template #noImage>
-              <i nz-icon nzType="tool" nzTheme="outline" class="card-container__card__icon"></i>
-            </ng-template>
-          </a>
-        </div>
-        <ng-template #extraTemplate>
-          <i nz-dropdown nz-icon nzType="more" nzTheme="outline" [nzDropdownMenu]="cardMenu"
-             nzPlacement="bottomRight"></i>
-          <nz-dropdown-menu #cardMenu="nzDropdownMenu" class="dropdown-menu">
-            <ul nz-menu>
-              <li nz-menu-item class="dropdown-menu__item" (click)="openAutomationModal(automation, true)">
-                <i nz-icon nzType="edit" nzTheme="outline" class="dropdown-menu__item__icon"></i> Edit
-              </li>
-              <li nz-menu-item class="dropdown-menu__item" (click)="deleteAutomation(automation.id!)">
-                <i nz-icon nzType="delete" nzTheme="outline" class="dropdown-menu__item__icon"></i> Delete
-              </li>
-            </ul>
-          </nz-dropdown-menu>
-        </ng-template>
-      </nz-card>
-    </div>
-  </nz-content>
+<section>
+  <nz-layout>
+    <nz-header class="header-container">
+      <div class="header-content">
+        <h1 class="header-content__title">ServiceHub</h1>
+        <i
+          class="header-content__menu"
+          nz-dropdown
+          nz-icon
+          nzType="menu"
+          [nzDropdownMenu]="mainMenu"
+          nzTheme="outline"
+          nzPlacement="bottomRight"
+        ></i>
+        <nz-dropdown-menu #mainMenu="nzDropdownMenu">
+          <ul nz-menu>
+            <li nz-menu-item (click)="showProfileModal()">
+              <i
+                class="menu-item__icon"
+                nz-icon
+                nzType="user"
+                nzTheme="outline"
+              ></i>
+              Profile
+            </li>
+            <li nz-menu-item (click)="openAutomationModal()">
+              <i
+                class="menu-item__icon"
+                nz-icon
+                nzType="plus"
+                nzTheme="outline"
+              ></i>
+              Add Automation
+            </li>
+            <li nz-menu-item (click)="logout()">
+              <i
+                class="menu-item__icon"
+                nz-icon
+                nzType="logout"
+                nzTheme="outline"
+              ></i>
+              Logout
+            </li>
+          </ul>
+        </nz-dropdown-menu>
+      </div>
+    </nz-header>
+    <nz-content class="content-container">
+      <div
+        cdkDropList
+        cdkDropListOrientation="horizontal"
+        class="card-container"
+        (cdkDropListDropped)="drop($event)"
+      >
+        <nz-card
+          class="card-container__card"
+          *ngFor="let automation of automations"
+          cdkDrag
+          nzTitle="{{ automation.name }}"
+          [nzExtra]="extraTemplate"
+        >
+          <div class="card-container__card__image-wrapper">
+            <a [href]="'/' + automation.urlPath">
+              <img
+                *ngIf="automation.image; else noImage"
+                class="card-container__card__image"
+                [src]="'/api/v1/automation/images/' + automation.image"
+                alt="{{ automation.name }}"
+              />
+              <ng-template #noImage>
+                <i
+                  nz-icon
+                  nzType="tool"
+                  nzTheme="outline"
+                  class="card-container__card__icon"
+                ></i>
+              </ng-template>
+            </a>
+          </div>
+          <ng-template #extraTemplate>
+            <i
+              nz-dropdown
+              nz-icon
+              nzType="more"
+              nzTheme="outline"
+              [nzDropdownMenu]="cardMenu"
+              nzPlacement="bottomRight"
+            ></i>
+            <nz-dropdown-menu #cardMenu="nzDropdownMenu" class="dropdown-menu">
+              <ul nz-menu>
+                <li
+                  nz-menu-item
+                  class="dropdown-menu__item"
+                  (click)="openAutomationModal(automation, true)"
+                >
+                  <i
+                    nz-icon
+                    nzType="edit"
+                    nzTheme="outline"
+                    class="dropdown-menu__item__icon"
+                  ></i>
+                  Edit
+                </li>
+                <li
+                  nz-menu-item
+                  class="dropdown-menu__item"
+                  (click)="deleteAutomation(automation.id!)"
+                >
+                  <i
+                    nz-icon
+                    nzType="delete"
+                    nzTheme="outline"
+                    class="dropdown-menu__item__icon"
+                  ></i>
+                  Delete
+                </li>
+              </ul>
+            </nz-dropdown-menu>
+          </ng-template>
+        </nz-card>
+      </div>
+    </nz-content>
 
-  <app-automations-form-modal #automationModal [uploadUrl]="'/api/image/upload'"
-                              (formDataSubmitted)="handleFormDataAutomationSubmitted($event)"></app-automations-form-modal>
+    <app-automations-form-modal
+      #automationModal
+      [uploadUrl]="'/api/image/upload'"
+      (formDataSubmitted)="handleFormDataAutomationSubmitted($event)"
+    ></app-automations-form-modal>
 
-
-  <nz-modal [(nzVisible)]="isProfileVisible" nzTitle="Profile" (nzOnCancel)="handleProfileCancel()"
-            (nzOnOk)="onProfileSubmit()" [nzOkDisabled]="profileForm.invalid" nzOkText="Update">
-    <ng-container *nzModalContent>
-      <form nz-form [formGroup]="profileForm" (ngSubmit)="onProfileSubmit()">
-        <nz-form-item>
-          <nz-form-label [nzSpan]="7" nzJustify="start" nzRequired>Email</nz-form-label>
-          <nz-form-control [nzSpan]="12" nzHasFeedback nzErrorTip="Please input a valid email!">
-            <input nz-input formControlName="email" placeholder="Enter email">
-          </nz-form-control>
-        </nz-form-item>
-        <nz-form-item nzJustify="start">
-          <nz-form-label [nzSpan]="7" nzJustify="start" nzRequired>Password</nz-form-label>
-          <nz-form-control [nzSpan]="12" nzHasFeedback>
-            <nz-input-group [nzSuffix]="suffixIcon">
-              <input nz-input type="password" formControlName="password" placeholder="Enter password"
-                     [type]="hidePassword ? 'password' : 'text'">
-            </nz-input-group>
-            <ng-template #suffixIcon>
-              <i nz-icon [nzType]="hidePassword ? 'eye-invisible' : 'eye'" (click)="hidePassword = !hidePassword"></i>
-            </ng-template>
-          </nz-form-control>
-        </nz-form-item>
-        <nz-form-item>
-          <nz-form-label [nzSpan]="7" nzJustify="start" nzRequired>Confirm Password</nz-form-label>
-          <nz-form-control [nzSpan]="12" nzHasFeedback [ngClass]="{'has-error': profileForm.errors?.['notSame']}">
-            <nz-input-group [nzSuffix]="suffixIcon2">
-              <input nz-input type="password" formControlName="confirmPassword" placeholder="Confirm password"
-                     [type]="hidePasswordConfirm ? 'password' : 'text'">
-            </nz-input-group>
-            <ng-template #suffixIcon2>
-              <i nz-icon [nzType]="hidePasswordConfirm ? 'eye-invisible' : 'eye'"
-                 (click)="hidePasswordConfirm = !hidePasswordConfirm"></i>
-            </ng-template>
-          </nz-form-control>
-        </nz-form-item>
-        <p class="error-message"
-           *ngIf="profileForm.controls['confirmPassword'].dirty && profileForm.hasError('notSame')">The passwords do not
-          match</p>
-      </form>
-    </ng-container>
-    <ng-container *nzModalFooter>
-      <button nz-button nzType="default" (click)="handleProfileCancel()">Cancel</button>
-      <button nz-button nzType="primary" [disabled]="profileForm.invalid" (click)="onProfileSubmit()"
-              class="save-button">
-        <i nz-icon nzType="save"></i> Save
-      </button>
-    </ng-container>
-  </nz-modal>
-
-</nz-layout>
+    <nz-modal
+      [(nzVisible)]="isProfileVisible"
+      nzTitle="Profile"
+      (nzOnCancel)="handleProfileCancel()"
+      (nzOnOk)="onProfileSubmit()"
+      [nzOkDisabled]="profileForm.invalid"
+      nzOkText="Update"
+    >
+      <ng-container *nzModalContent>
+        <form nz-form [formGroup]="profileForm" (ngSubmit)="onProfileSubmit()">
+          <nz-form-item>
+            <nz-form-label [nzSpan]="7" nzJustify="start" nzRequired
+              >Email</nz-form-label
+            >
+            <nz-form-control
+              [nzSpan]="12"
+              nzHasFeedback
+              nzErrorTip="Please input a valid email!"
+            >
+              <input
+                nz-input
+                formControlName="email"
+                placeholder="Enter email"
+              />
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item nzJustify="start">
+            <nz-form-label [nzSpan]="7" nzJustify="start" nzRequired
+              >Password</nz-form-label
+            >
+            <nz-form-control [nzSpan]="12" nzHasFeedback>
+              <nz-input-group [nzSuffix]="suffixIcon">
+                <input
+                  nz-input
+                  type="password"
+                  formControlName="password"
+                  placeholder="Enter password"
+                  [type]="hidePassword ? 'password' : 'text'"
+                />
+              </nz-input-group>
+              <ng-template #suffixIcon>
+                <i
+                  nz-icon
+                  [nzType]="hidePassword ? 'eye-invisible' : 'eye'"
+                  (click)="hidePassword = !hidePassword"
+                ></i>
+              </ng-template>
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item>
+            <nz-form-label [nzSpan]="7" nzJustify="start" nzRequired
+              >Confirm Password</nz-form-label
+            >
+            <nz-form-control
+              [nzSpan]="12"
+              nzHasFeedback
+              [ngClass]="{'has-error': profileForm.errors?.['notSame']}"
+            >
+              <nz-input-group [nzSuffix]="suffixIcon2">
+                <input
+                  nz-input
+                  type="password"
+                  formControlName="confirmPassword"
+                  placeholder="Confirm password"
+                  [type]="hidePasswordConfirm ? 'password' : 'text'"
+                />
+              </nz-input-group>
+              <ng-template #suffixIcon2>
+                <i
+                  nz-icon
+                  [nzType]="hidePasswordConfirm ? 'eye-invisible' : 'eye'"
+                  (click)="hidePasswordConfirm = !hidePasswordConfirm"
+                ></i>
+              </ng-template>
+            </nz-form-control>
+          </nz-form-item>
+          <p
+            class="error-message"
+            *ngIf="
+              profileForm.controls['confirmPassword'].dirty &&
+              profileForm.hasError('notSame')
+            "
+          >
+            The passwords do not match
+          </p>
+        </form>
+      </ng-container>
+      <ng-container *nzModalFooter>
+        <button nz-button nzType="default" (click)="handleProfileCancel()">
+          Cancel
+        </button>
+        <button
+          nz-button
+          nzType="primary"
+          [disabled]="profileForm.invalid"
+          (click)="onProfileSubmit()"
+          class="save-button"
+        >
+          <i nz-icon nzType="save"></i> Save
+        </button>
+      </ng-container>
+    </nz-modal>
+  </nz-layout>
+</section>
