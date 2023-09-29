@@ -137,6 +137,10 @@ export class AutomationsFormComponent implements OnInit {
   }
 
   deleteImage() {
-    this.removeImage = true
+    if (this.removeImage) {
+      this.removeImage = false
+    } else {
+      this.removeImage = true
+    }
   }
 }

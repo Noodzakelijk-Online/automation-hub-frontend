@@ -55,19 +55,21 @@
         <nz-form-item>
           <nz-form-label [nzSpan]="5">Image</nz-form-label>
           <nz-form-control [nzSpan]="12">
-            <nz-upload
-              nzType="drag"
-              [nzMultiple]="false"
-              nzName="image"
-              [nzBeforeUpload]="beforeUpload"
-            >
-              <p class="ant-upload-drag-icon">
-                <i nz-icon nzType="inbox"></i>
-              </p>
-              <p class="ant-upload-text">
-                Click or drag image to this area to upload
-              </p>
-            </nz-upload>
+            <ng-container *ngIf="!removeImage">
+              <nz-upload
+                nzType="drag"
+                [nzMultiple]="false"
+                nzName="image"
+                [nzBeforeUpload]="beforeUpload"
+              >
+                <p class="ant-upload-drag-icon">
+                  <i nz-icon nzType="inbox"></i>
+                </p>
+                <p class="ant-upload-text">
+                  Click or drag image to this area to upload
+                </p>
+              </nz-upload>
+            </ng-container>
             <!-- <button class="ant-button-remove-image" nz-button></button> -->
             <ng-container *ngIf="removeImage">
               <div class="ant-upload-text__information">
@@ -77,7 +79,7 @@
                   (click)="deleteImage()"
                   style="color: green"
                 >
-                  Remove Image
+                  Image Removed
                 </span>
               </div>
             </ng-container>
