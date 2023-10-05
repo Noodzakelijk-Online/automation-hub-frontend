@@ -1,24 +1,31 @@
-import {IAutomationModel} from "./automation.model.interface";
-
+import { IAutomationModel } from "./automation.model.interface";
 
 export class AutomationModel implements IAutomationModel {
-
-  private _name: string = '';
-  private _image: string = '';
-  private _host: string = '';
+  private _name: string = "";
+  private _image: string = "";
+  private _host: string = "";
   private _port: number = -1;
   private _position: number = -1;
-    private _id?: number = -1;
+  private _id?: string = "";
+  private _removeImage = false;
 
-  constructor(name: string, image: string, host: string, port: number, position: number, id?: number) {
+  constructor(
+    name: string,
+    image: string,
+    host: string,
+    port: number,
+    position: number,
+    removeImage: boolean,
+    id?: string
+  ) {
     this._name = name;
     this._image = image;
     this._host = host;
     this._port = port;
     this._position = position;
     this._id = id;
+    this._removeImage = removeImage;
   }
-
 
   get image(): string {
     return this._image;
@@ -60,11 +67,19 @@ export class AutomationModel implements IAutomationModel {
     this._position = value;
   }
 
-    get id(): number | undefined {
-        return this._id;
-    }
+  get id(): string | undefined {
+    return this._id;
+  }
 
-    set id(value: number | undefined) {
-        this._id = value;
-    }
+  set id(value: string | undefined) {
+    this._id = value;
+  }
+
+  get removeImage(): boolean {
+    return this._removeImage;
+  }
+
+  set removeImage(value: boolean) {
+    this._removeImage = value;
+  }
 }
