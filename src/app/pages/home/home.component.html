@@ -60,7 +60,7 @@
           [nzExtra]="extraTemplate"
         >
           <div class="card-container__card__image-wrapper">
-            <a [href]="'/' + automation.urlPath">
+            <a [href]="'/' + automation.host">
               <img
                 *ngIf="automation.image; else noImage"
                 class="card-container__card__image"
